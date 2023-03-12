@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exercise 5</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="hello5.css">
+    <link rel="shortcut icon" type="image/jpg" href="blue_computer-fav.svg"/>
+  <style>
+    body, html {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    svg {
+        width: 100%;
+        height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+    <svg>
+        <path stroke="none" fill="none" stroke-width="2" d="M 0 0 0 9000" id="drawnpath"></path>
+      
+        <text text-anchor="middle">
+          <textPath
+              class="my-text"
+              font-size="40"
+              href="#drawnpath"
+              startOffset="50%"
+              fill="blue"
+          >
+            Hello World, my name is Emma
+          </textPath>
+        </text>
+      </svg>
+
+<script src="hello5.js"></script>
+</body>
+</html>

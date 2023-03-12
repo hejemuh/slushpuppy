@@ -1,0 +1,1 @@
+alert("Quick! Help put Harry back together again! \n\n Click new game to play.");

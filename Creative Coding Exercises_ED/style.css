@@ -1,0 +1,139 @@
+:root{
+    --gutter: 25px;
+    --marginX: 50px;
+    --marginY: 40px;
+}
+
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-size: 16px;
+    scroll-behavior: smooth; 
+}
+
+
+body{
+    background:#F2F2EF;
+    color:#FC493B;
+    margin:var(--marginY) var(--marginX) ;
+    font-family: EverettMono, monospace;
+    font-family: EverettMono, monospace;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 110%;
+    letter-spacing: -0.01em;
+    text-transform:lowercase;
+}
+.cols{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.cols > * {
+    width:calc(33.3333333% - var(--gutter)*2/3);
+
+    /* background:red; */
+}
+
+h1{
+    font-size:1rem;
+    font-weight:400;
+    margin-top:0px;
+}
+
+a{
+    text-decoration: none;
+    color:#FC493B;
+}
+
+a:after{
+    display:inline-block;
+    content: url('arrow.svg');
+    margin-left:0.3rem;
+    position:relative;
+    top:1px;
+    transition:transform 200ms;
+}
+
+a:hover:after{
+    transform:rotate(45deg);
+}
+
+ul{
+    list-style-type: none;
+    padding:0px;
+    margin-top:0px;
+}
+li{
+    margin-top:0px;
+    transition: margin-top 300ms;
+}
+
+#name{
+    cursor:pointer;
+    position:fixed;
+    left: var(--marginX);
+    top: var(--marginY);
+    /* transition:250ms ease-out; */
+    z-index:2;
+
+}
+
+#name > *.fixed{
+    position:fixed;
+    transition: top 200ms, left 200ms;
+    /* transition-timing-function: cubic-bezier(.5,0,1,.50);; */
+    /* transition-timing-function: cubic-bezier(.4,0,1,.4);; */
+    /* transition-timing-function: cubic-bezier(.22,.4,.55,.87); */
+    transition-timing-function: ease-in-out;
+}
+
+#arrow{
+    /* visibility:hidden; */
+    /* position:relative; */
+    /* top:1px; */
+    transition: transform 400ms;
+    transform: rotate(45deg);
+}
+#arrow.fixed{
+    transition: transform 200ms, top 200ms, left 200ms;
+    transition-timing-function: linear;
+}
+#name:hover #arrow{
+    visibility:visible;
+}
+
+#testBlock{
+    width:100px;
+    height:100px;
+    background:red;
+    position:fixed;
+    top:10px;
+    pointer-events:none;
+    opacity:0.5;
+    display:none;
+}
+
+@media screen and (max-width: 870px){
+    .cols > *{
+        width: calc(50% - var(--gutter)*1/2)
+    }
+
+    .cols > *:last-child{
+        margin-left: calc(50% + var(--gutter)/2);
+    }
+}
+
+@media screen and (max-width: 630px){
+    :root{
+        --marginX: 10px;
+        --marginY: 10px;
+    }
+    .cols > *{
+        width: 100%;
+    }
+    .cols > *:last-child{
+        margin-left: 0px;
+    }
+}

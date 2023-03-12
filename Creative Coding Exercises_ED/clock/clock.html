@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Just a Clock</title>
+  <link href="clock.css" rel="stylesheet"></head>
+  <link rel="shortcut icon" type="image/jpg" href="palette_fav.svg"/>
+
+  <body>
+    <div id="capture">
+    <div id="day"></div>
+    <div class="item">
+    </div>
+    <div id="clock"></div>
+
+    <nav>
+        <a href="#" style="background-color: #ff0095"></a>
+          <a href="#" style="background-color: #feed36"></a>
+          <a href="#" style="background-color: #1500ff"></a>
+          <a href="#" style="background-color: #08bc02"></a>
+          <a href="#" style="background-color: #f6c7d3"></a>
+          <a href="#" style="background-color: #f90505"></a>
+          <a href="#" style="background-color: #00ff44"></a>
+          <a href="#" style="background-color: #c6004f"></a>
+          <a href="#" style="background-color: #f96800"></a>
+          <a href="#" style="background-color: #5139b8"></a>
+          <a href="#" style="background-color: #000000"></a>
+        
+      </nav>
+      <div>
+        <button id="button" class="inline">
+            <span>Take Screenshot</span>
+        </button>
+    </div>
+      <canvas>
+      </canvas>
+    </div>
+
+    <div id="screenshots">
+    </div>
+    <script>
+      // not sure why this wasn't working when i had it in my linked script file.
+      var paintBrush = [],
+          mouse = {
+              x: 0,
+              y: 0
+          };
+      var point = function () {
+          this.x = 0;
+          this.y = 0;
+          // creates a paragraph to hold the points created by mouse movement
+          this.node = (function () {
+              var trailP = document.createElement("p");
+              trailP.className = "trail";
+              document.body.appendChild(trailP);
+              // makes sure that the trail is rendered on top of everything
+              trailP.style.zIndex = "1";
+              return trailP;
+          }());
+      };
+
+      point.prototype.doodle = function () {
+          this.node.style.left = this.x + "px";
+          this.node.style.top = this.y + "px";
+      };
+
+      // loop that creates points which gives illusion of trail. 200 is the number i chose to make it feel like more of a solid line
+      for (var i = 0; i < 200; i++) {
+          var variousPoints = new point();
+          paintBrush.push(variousPoints);
+      }
+
+      function doodle() {
+          var x = mouse.x,
+              y = mouse.y;
+
+          paintBrush.forEach(function (point, index, paintBrush) {
+              // line created
+              var oneMore = paintBrush[index + 1] || paintBrush[0];
+
+              point.x = x;
+              point.y = y;
+              point.doodle();
+              // interval between points — set to low number to reduce "point like appearance"
+              x += (oneMore.x - point.x) * .05;
+              y += (oneMore.y - point.y) * .05;
+
+          });
+      }
+      // tracking on mouse move
+      addEventListener("mousemove", function (event) {
+          mouse.x = event.pageX;
+          mouse.y = event.pageY;
+      });
+      function trailStart() {
+          // calling the doodle function from above
+          doodle();
+          requestAnimationFrame(trailStart);
+      }
+      // calls start of trail function
+      trailStart();
+
+      // screenshot stuff below
+      const btn = document.getElementById('button');
+      btn.addEventListener("click", function () {
+          console.log("button clicked !");
+          new Screenshot({
+              success: img => {
+                  document.getElementById('screenshots').append(img);
+              },
+              height: 300,
+              sound: true,
+          })
+      });
+  </script>
+   
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="color.js"></script>
+    <script src="clock.js"></script>
+    <script src="screenshot.js"></script>
+
+  
+  </body>
+</html>
